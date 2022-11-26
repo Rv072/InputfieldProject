@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" sizes="32x32" rel="icon" href="./utils/brandiimg/favicn.png">
+    <title>Intech_syatem_project</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="heading">
+            <div class="leftHeading">
+                <div>
+                    <img src="./utils/brandiimg/brandLlogo.png" alt="Brand-Logo" />
+                </div>
+                <h3 class="logoTitle">Welcome To The Developer's World</h3>
+            </div>
+            <div class="userProfile">
+                <div class="userIcon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <p class="userText">Profile</p>
+            </div>
+        </header>
+        <div class="mainContainer">
+            <div class="subContainer">
+                <h3>Fill The Form</h3>
+                <form action="#">
+                    <div class="inputBoxFields">
+                        <div class="labelText">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fName" placeholder="First Name" class="inputField">
+                        </div>
+                        <div class="labelText">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lName" name="lName" placeholder="Last Name" class="inputField">
+                        </div>
+                    </div>
+                    <div class="inputBoxFields">
+                        <div class="labelText">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Email" class="inputField">
+                        </div>
+                        <div class="labelText">
+                            <label for="Contact">Contact no.</label>
+                            <input type="number" id="contactNo" name="contactNo" placeholder="Contact no"
+                                class="inputField">
+                        </div>
+                    </div>
+                    <div class="inputBoxFields">
+                        <div class="labelText">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" placeholder="Country" class="inputField">
+                        </div>
+                        <div class="labelText">
+                            <label for="State">State</label>
+                            <input type="text" id="state" name="state" placeholder="State" class="inputField">
+                        </div>
+                    </div>
+
+                </form>
+                <input type="submit" class="button " onclick="buttonSubmit()" />
+            </div>
+        </div>
+        <footer class="footerPage">
+            <div align="center" class="socialbtn">
+                <ul>
+                    <li><a href="#" class="fa fa-lg fa-facebook"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-twitter"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-google-plus"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-github"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-pinterest"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-linkedin"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-instagram"></a></li>
+                    <li><a href="#" class="fa fa-lg fa-youtube"></a></li>
+                </ul>
+                <p>You can Connect us on any Platform...😊</p>
+            </div>
+        </footer>
+    </div>
+    <p id="collectedData" class="dataCollected">On clicking "Submit button" Data will be displayed here</p>
+    <script>
+        let userList = [];
+        const buttonSubmit = () => {
+            let firstName = document.getElementById("fName").value;
+            let lastName = document.getElementById("lName").value;
+            let phoneNumber = document.getElementById("contactNo").value;
+            let emailAddress = document.getElementById("email").value;
+            let countryRegion = document.getElementById("country").value;
+            let stateRegion = document.getElementById("state").value;
+
+            let myData = {
+                fname: firstName,
+                lname: lastName,
+                number: phoneNumber,
+                mailID: emailAddress,
+                country: countryRegion,
+                state: stateRegion,
+            };
+            userList.push(myData);
+            let formData = localStorage.setItem("userData", JSON.stringify(userList));
+            tableDataPopulate();
+        };
+        const tableDataPopulate = () => {
+            const allData = localStorage.getItem("userData");
+            const table = document.getElementById("collectedData");
+            let userHtml = "";
+            userList.forEach((user, i) => {
+                userHtml += `first Name := ${user.fname} <br>
+                Last Name := ${user.lname}<br>
+                ContactNo. := ${user.number}  <br>          
+                Email := ${user.mailID} <br>       
+                Country := ${user.country}<br>       
+                State := ${user.state}`;
+            });
+            table.innerHTML = userHtml;
+        };
+    </script>
+</body>
